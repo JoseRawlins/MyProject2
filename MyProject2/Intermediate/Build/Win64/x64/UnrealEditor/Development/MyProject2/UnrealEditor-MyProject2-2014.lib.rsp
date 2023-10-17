@@ -1,0 +1,15 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-MyProject2-2014.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\MyProject2\Intermediate\Build\Win64\x64\MyProject2Editor\Development\Engine\SharedPCH.Engine.Cpp20.h.obj"
+"D:\MyProject2\Intermediate\Build\Win64\x64\UnrealEditor\Development\MyProject2\AbstractLogComponent.gen.cpp.obj"
+"D:\MyProject2\Intermediate\Build\Win64\x64\UnrealEditor\Development\MyProject2\MyProject2.init.gen.cpp.obj"
+"D:\MyProject2\Intermediate\Build\Win64\x64\UnrealEditor\Development\MyProject2\MyProject2.cpp.obj"
+"D:\MyProject2\Intermediate\Build\Win64\x64\UnrealEditor\Development\MyProject2\AbstractLogComponent.cpp.obj"
+"D:\MyProject2\Intermediate\Build\Win64\x64\UnrealEditor\Development\MyProject2\Default.rc2.res"
+/OUT:"D:\MyProject2\Intermediate\Build\Win64\x64\UnrealEditor\Development\MyProject2\UnrealEditor-MyProject2-2014.lib"
