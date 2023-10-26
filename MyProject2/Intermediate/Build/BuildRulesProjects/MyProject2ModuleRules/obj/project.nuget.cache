@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KKzCgg1xj+ChADZnfh2oD7U9rhM4g7MLTPe0vtv6Sbhm8PcP93J0Em2r/8edkaimNi8p0zVldo0Z5fc6/vXZhg==",
+  "dgSpecHash": "chV0lOzQP8WJQRLJKppeoiQeww7Rvwida1qEq1j700mFivPpgD1amD1hl1E865SUIBU9dHOVcm+vSgcHh9DI4w==",
   "success": true,
-  "projectFilePath": "D:\\MyProject2\\Intermediate\\Build\\BuildRulesProjects\\MyProject2ModuleRules\\MyProject2ModuleRules.csproj",
+  "projectFilePath": "D:\\MyProject2\\MyProject2\\Intermediate\\Build\\BuildRulesProjects\\MyProject2ModuleRules\\MyProject2ModuleRules.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\josej\\.nuget\\packages\\blake3\\0.5.1\\blake3.0.5.1.nupkg.sha512",
     "C:\\Users\\josej\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",

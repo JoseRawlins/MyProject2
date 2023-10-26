@@ -51,6 +51,12 @@
     <ClCompile Include="..\..\Source\MyProject2\Private\InteractableDoor.cpp">
       <Filter>Source\MyProject2\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\MyProject2\Private\MyProject2GameModeBase.cpp">
+      <Filter>Source\MyProject2\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MyProject2\Private\ObjectiveWorldSubsystem.cpp">
+      <Filter>Source\MyProject2\Private</Filter>
+    </ClCompile>
     <Filter Include="Source\MyProject2\Public">
       <UniqueIdentifier>{72360B30-4ADA-3AEE-BF83-05F51D365389}</UniqueIdentifier>
     </Filter>
@@ -61,6 +67,12 @@
       <Filter>Source\MyProject2\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\MyProject2\Public\InteractableDoor.h">
+      <Filter>Source\MyProject2\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MyProject2\Public\MyProject2GameModeBase.h">
+      <Filter>Source\MyProject2\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MyProject2\Public\ObjectiveWorldSubsystem.h">
       <Filter>Source\MyProject2\Public</Filter>
     </ClInclude>
   </ItemGroup>

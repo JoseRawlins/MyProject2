@@ -92,15 +92,15 @@ void EmptyLinkFunctionForGeneratedCodeAbstractLogComponent() {}
 	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UAbstractLogComponent);
 	UAbstractLogComponent::~UAbstractLogComponent() {}
-	struct Z_CompiledInDeferFile_FID_MyProject2_Source_MyProject2_Public_AbstractLogComponent_h_Statics
+	struct Z_CompiledInDeferFile_FID_MyProject2_MyProject2_Source_MyProject2_Public_AbstractLogComponent_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MyProject2_Source_MyProject2_Public_AbstractLogComponent_h_Statics::ClassInfo[] = {
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MyProject2_MyProject2_Source_MyProject2_Public_AbstractLogComponent_h_Statics::ClassInfo[] = {
 		{ Z_Construct_UClass_UAbstractLogComponent, UAbstractLogComponent::StaticClass, TEXT("UAbstractLogComponent"), &Z_Registration_Info_UClass_UAbstractLogComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAbstractLogComponent), 1995448657U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MyProject2_Source_MyProject2_Public_AbstractLogComponent_h_3724561245(TEXT("/Script/MyProject2"),
-		Z_CompiledInDeferFile_FID_MyProject2_Source_MyProject2_Public_AbstractLogComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MyProject2_Source_MyProject2_Public_AbstractLogComponent_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MyProject2_MyProject2_Source_MyProject2_Public_AbstractLogComponent_h_3724561245(TEXT("/Script/MyProject2"),
+		Z_CompiledInDeferFile_FID_MyProject2_MyProject2_Source_MyProject2_Public_AbstractLogComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MyProject2_MyProject2_Source_MyProject2_Public_AbstractLogComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
