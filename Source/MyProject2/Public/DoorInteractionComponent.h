@@ -34,6 +34,8 @@ public:
 
 	FOpened OpenedEvent;
 
+	void OnDoorOpen();
+
 	static void OnDebugToggled(IConsoleVariable* Var);
 	void DebugDraw();
 protected:
