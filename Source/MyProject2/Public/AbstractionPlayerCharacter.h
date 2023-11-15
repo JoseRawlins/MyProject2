@@ -26,7 +26,7 @@ public:
 	/** Called when the actor falls out of the world 'safely' (below KillZ and such) */
 	virtual void FellOutOfWorld(const class UDamageType& dmgType) override;
 
-    virtual void TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser);
+    virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser);
 
 protected:
 	// Called when the game starts or when spawned
