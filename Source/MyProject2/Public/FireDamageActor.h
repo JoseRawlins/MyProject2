@@ -6,6 +6,9 @@
 #include "GameFramework/Actor.h"
 #include "FireDamageActor.generated.h"
 
+class UDealDamageComponent;
+class UParticleSystemComponent;
+
 UCLASS()
 class MYPROJECT2_API AFireDamageActor : public AActor
 {
@@ -14,7 +17,7 @@ class MYPROJECT2_API AFireDamageActor : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AFireDamageActor();
-
+	virtual void PostActorCreated() override;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -23,4 +26,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditAnywhere)
+	float ToggleTime = 5.0f;
+
+	float CurrentTimer = 0.0f;
+
+	UPROPERTY(EditAnywhere)
+	UDealDamageComponent* DealDamageComponent;
+	UPROPERTY(EditAnywhere)
+	UParticleSystemComponent* ParticleSystemComponent;
 };

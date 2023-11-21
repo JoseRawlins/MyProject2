@@ -8,7 +8,6 @@
 
 class UCapsuleComponent;
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MYPROJECT2_API UDealDamageComponent : public UActorComponent
 {
