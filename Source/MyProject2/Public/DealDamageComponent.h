@@ -3,10 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/CapsuleComponent.h"
 #include "Components/ActorComponent.h"
 #include "DealDamageComponent.generated.h"
 
 class UCapsuleComponent;
+
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MYPROJECT2_API UDealDamageComponent : public UActorComponent
@@ -25,8 +27,8 @@ public:
 
 	UCapsuleComponent* GetTriggerCapsule() const { return TriggerCapsule; }
 
-	bool IsActive() const { return bActive; }
-	void SetActive(bool IsActive) { bActive = IsActive; }
+	bool IsEnabled() const { return bEnabled; }
+	void SetEnabled(bool IsEnabled) { bEnabled = IsEnabled; }
 
 protected:
 	// Called when the game starts
@@ -35,8 +37,16 @@ protected:
 	UPROPERTY(EditAnywhere)
 	float BaseDamage = 50.0f;
 
+	//the base damage is distributed over this time
+	UPROPERTY(EditAnywhere)
+	float DamageTotalTime = 2.0f;
+
+	//the time interval at which to apply take damage
+	UPROPERTY(EditAnywhere)
+	float TakeDamageInterval = 0.5f;
+
 	UPROPERTY(EditAnywhere, NoClear)
 	UCapsuleComponent* TriggerCapsule;
 
-	bool bActive = true;
+	bool bEnabled = true;
 };

@@ -4,6 +4,7 @@
 #include "DealDamageComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "AbstractionPlayerCharacter.h"
+#include "Engine/DamageEvents.h"
 #include "GameFramework/DamageType.h"
 
 // Sets default values for this component's properties
@@ -28,7 +29,7 @@ void UDealDamageComponent::OnOverlapBegin(class UPrimitiveComponent* OverlappedC
 {
 	UE_LOG(LogTemp, Warning, TEXT("UDealDamageComponent::OnOverlapBegin"));
 
-	if (!bActive)
+	if (!bEnabled)
 	{
 		return;
 	}
@@ -42,9 +43,9 @@ void UDealDamageComponent::OnOverlapBegin(class UPrimitiveComponent* OverlappedC
 	if (PlayerCharacter)
 	{
 		TSubclassOf<UDamageType> const ValidDamageTypeClass = TSubclassOf<UDamageType>(UDamageType::StaticClass());
-		//FDamageEvent DamageEvent(ValidDamageTypeClass);
+		FDamageEvent DamageEvent(ValidDamageTypeClass);
 
-		//PlayerCharacter->TakeDamage(BaseDamage, DamageEvent, nullptr, GetOwner());
+		PlayerCharacter->TakeDamage(BaseDamage, DamageEvent, nullptr, GetOwner());
 	}
 }
 

@@ -45,3 +45,8 @@ void UObjectiveComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	Super::EndPlay(EndPlayReason);
 }
 
+void UObjectiveComponent::InitializeComponent()
+{
+
+}
+

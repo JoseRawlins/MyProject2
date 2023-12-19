@@ -21,6 +21,10 @@ AFireDamageActor::AFireDamageActor()
 
 }
 
+void AFireDamageActor::PostActorCreated()
+{
+}
+
 // Called when the game starts or when spawned
 void AFireDamageActor::BeginPlay()
 {

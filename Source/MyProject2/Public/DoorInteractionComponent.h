@@ -5,7 +5,10 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Curves/CurveFloat.h"
+#include "Subsystems/WorldSubsystem.h"
+#include "InteractionComponent.h"
 #include "DoorInteractionComponent.generated.h"
+
 
 class ATriggerBox;
 class IConsoleVariable;
@@ -19,29 +22,46 @@ enum class EDoorState
 	DS_Locked = 3 UMETA(DisplayName = "Locked"),
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOpenDoor);
+
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class MYPROJECT2_API UDoorInteractionComponent : public UActorComponent
+class MYPROJECT2_API UDoorInteractionComponent : public UInteractionComponent
 {
 	GENERATED_BODY()
 
 public:	
+	// Sets default values for this component's properties
 	UDoorInteractionComponent();
 
+	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	static void OnDebugToggled(IConsoleVariable* Var);
 
 	DECLARE_EVENT(FDoorInteractionComponent, FOpened)
 	FOpened& OnOpened() { return OpenedEvent; }
 
 	FOpened OpenedEvent;
 
-	void OnDoorOpen();
-
-	static void OnDebugToggled(IConsoleVariable* Var);
-	void DebugDraw();
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	//binded to interaction input from player
+	void InteractionStart() override;
+
+	//request to open the door
+	UFUNCTION(BlueprintCallable)
+	void OpenDoor();
+
+	//called internally when door has finished opening
+	void OnDoorOpen();
+
+	UFUNCTION(BlueprintCallable)
+	bool IsOpen() { return DoorState == EDoorState::DS_Open; }
+
+	void DebugDraw();
+	
 	UPROPERTY(EditAnywhere)
 	FRotator DesiredRotation = FRotator::ZeroRotator;
 
@@ -61,4 +81,6 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly)
 	EDoorState DoorState;
+
+
 };

@@ -5,14 +5,19 @@
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/DamageType.h"
 #include "HealthComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Components/InputComponent.h"
 
 // Sets default values
-AAbstractionPlayerCharacter::AAbstractionPlayerCharacter()
+AAbstractionPlayerCharacter::AAbstractionPlayerCharacter(const FObjectInitializer& ObjectInitalizer)
+: Super(ObjectInitalizer)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+	ParticleSystemComponent = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Particle System"));
+	ParticleSystemComponent->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -32,7 +37,11 @@ void AAbstractionPlayerCharacter::Tick(float DeltaTime)
 void AAbstractionPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+	FInputActionBinding* Binding;
+	//these functions fire off events
+	//interaction component listens to them
+	Binding = &PlayerInputComponent->BindAction(FName("InteractionStart"), IE_Pressed, this, &AAbstractionPlayerCharacter::StartInteraction);
+	Binding = &PlayerInputComponent->BindAction(FName("InteractionCancel"), IE_Pressed, this, &AAbstractionPlayerCharacter::StopInteraction);
 }
 
 void AAbstractionPlayerCharacter::FellOutOfWorld(const class UDamageType& dmgType)
@@ -55,6 +64,23 @@ float AAbstractionPlayerCharacter::TakeDamage(float DamageAmount, FDamageEvent c
 	return Damage;
 }
 
+void AAbstractionPlayerCharacter::SetOnFire(UParticleSystemComponent* FireParticleSystemComponent)
+{
+	ParticleSystemComponent->SetTemplate(FireParticleSystemComponent->Template);
+	ParticleSystemComponent->Activate();
+}
+
+const bool AAbstractionPlayerCharacter::IsAlive() const
+{
+	return false;
+}
+
+const float AAbstractionPlayerCharacter::GetCurrentHealth() const
+{
+	return 0.0f;
+}
+
+
 void AAbstractionPlayerCharacter::OnDeath(bool IsFellOut)
 {
 	APlayerController* PlayerController = GetController<APlayerController>();
@@ -62,6 +88,20 @@ void AAbstractionPlayerCharacter::OnDeath(bool IsFellOut)
 	{
 		PlayerController->RestartLevel();
 	}
+}
+
+void AAbstractionPlayerCharacter::OnDeathTimerFinished()
+{
+}
+
+void AAbstractionPlayerCharacter::StartInteraction()
+{
+	OnInteractionStart.Broadcast();
+}
+
+void AAbstractionPlayerCharacter::StopInteraction()
+{
+	OnInteractionCancel.Broadcast();
 }
 
 

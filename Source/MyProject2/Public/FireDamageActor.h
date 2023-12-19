@@ -18,6 +18,7 @@ public:
 	// Sets default values for this actor's properties
 	AFireDamageActor();
 	virtual void PostActorCreated() override;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -35,4 +36,5 @@ public:
 	UDealDamageComponent* DealDamageComponent;
 	UPROPERTY(EditAnywhere)
 	UParticleSystemComponent* ParticleSystemComponent;
+
 };

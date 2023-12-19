@@ -14,6 +14,7 @@ enum class EObjectiveState
 	OS_Completed = 2 UMETA(DisplayName = "Completed"),
 };
 
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MYPROJECT2_API UObjectiveComponent : public UActorComponent
 {
@@ -37,6 +38,7 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	void InitializeComponent();
 
 	UPROPERTY(EditAnywhere)
 	FString Description;

@@ -6,7 +6,13 @@
 #include "GameFramework/Character.h"
 #include "AbstractionPlayerCharacter.generated.h"
 
+
 class UHealthComponent;
+class UParticleSystemComponent;
+class UDamageHandlerComponent;
+
+DECLARE_MULTICAST_DELEGATE(FOnInteractionStart);
+DECLARE_MULTICAST_DELEGATE(FOnInteractionCancel);
 
 UCLASS()
 class MYPROJECT2_API AAbstractionPlayerCharacter : public ACharacter
@@ -15,7 +21,10 @@ class MYPROJECT2_API AAbstractionPlayerCharacter : public ACharacter
 
 public:
 	// Sets default values for this character's properties
-	AAbstractionPlayerCharacter();
+	//AAbstractionPlayerCharacter();
+
+
+	AAbstractionPlayerCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -27,6 +36,25 @@ public:
 	virtual void FellOutOfWorld(const class UDamageType& dmgType) override;
 
     virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser);
+	void SetOnFire(UParticleSystemComponent* FireParticleSystemComponent);
+
+	UFUNCTION(BlueprintCallable)
+	const bool IsAlive() const;
+
+	UFUNCTION(BlueprintCallable)
+	const float GetCurrentHealth() const;
+
+	FOnInteractionStart OnInteractionStart;
+	FOnInteractionCancel OnInteractionCancel;
+
+	UPROPERTY(VisibleAnywhere)
+	UHealthComponent* HealthComponent;
+
+	UPROPERTY(VisibleAnywhere)
+	UDamageHandlerComponent* DamageHandlerComponent;
+
+	UPROPERTY(EditAnywhere)
+	UParticleSystemComponent* ParticleSystemComponent;
 
 protected:
 	// Called when the game starts or when spawned
@@ -34,6 +62,16 @@ protected:
 
 	void OnDeath(bool IsFellOut);
 
+	UFUNCTION()
+	void OnDeathTimerFinished();
+
+	//Input Bidnings
+	void StartInteraction();
+	void StopInteraction();
+
 	UPROPERTY(EditAnywhere)
-	UHealthComponent* HealthComponent;
+	float TimeRestartLevelAfterDeath = 2.0f;
+
+	//Handlet to manage the death timer
+	FTimerHandle RestartLevelTimerHandle;
 };

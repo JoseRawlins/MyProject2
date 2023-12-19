@@ -34,6 +34,14 @@ void UDoorInteractionComponent::BeginPlay()
 	CurrentRotationTime = 0.0f;
 }
 
+void UDoorInteractionComponent::InteractionStart()
+{
+}
+
+void UDoorInteractionComponent::OpenDoor()
+{
+}
+
 void UDoorInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "Blueprint/UserWidget.h"
+#include "ObjectiveHUD.h"
 #include "MyProject2GameModeBase.generated.h"
 
 UCLASS()
@@ -17,5 +18,7 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UUserWidget> ObjectiveWidgetClass;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widgets")
+	TSubclassOf<UUserWidget> ObjectivesCompleteWidgetClass;
 
 };
