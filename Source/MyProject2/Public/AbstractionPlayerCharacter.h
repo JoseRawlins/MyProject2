@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+//#include "../../../../Epic Games/UE_5.3/Engine/Plugins/Cameras/GameplayCameras/Source/GameplayCameras/Public/LegacyCameraShake.h"
 #include "AbstractionPlayerCharacter.generated.h"
-
 
 class UHealthComponent;
 class UParticleSystemComponent;
@@ -37,6 +37,15 @@ public:
 
     virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser);
 	void SetOnFire(UParticleSystemComponent* FireParticleSystemComponent);
+	 
+	UFUNCTION(BlueprintCallable)
+	void HandleItemCollected();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void ItemCollected();
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int ItemsCollected = 0;
 
 	UFUNCTION(BlueprintCallable)
 	const bool IsAlive() const;
@@ -74,4 +83,15 @@ protected:
 
 	//Handlet to manage the death timer
 	FTimerHandle RestartLevelTimerHandle;
+
+	APlayerController* PC;
+
+	UPROPERTY(EditAnywhere, Category="Effects")
+	TSubclassOf<UCameraShakeBase> CamShake;
+
+	//Force Feedback Falues
+	UPROPERTY(EditAnywhere, Category="Force Feedback")
+	float ForceFeedbackIntensity = 1.0f;
+	UPROPERTY(EditAnywhere, Category="Force Feedback")
+	float ForceFeedbackDuration = 1.0f;
 };

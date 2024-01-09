@@ -24,6 +24,9 @@ AAbstractionPlayerCharacter::AAbstractionPlayerCharacter(const FObjectInitialize
 void AAbstractionPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	PC = GetWorld()->GetFirstPlayerController();
+
 }
 
 // Called every frame
@@ -46,6 +49,7 @@ void AAbstractionPlayerCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 
 void AAbstractionPlayerCharacter::FellOutOfWorld(const class UDamageType& dmgType)
 {
+	HealthComponent->SetCurrentHealth(0.0f);
 	OnDeath(true);
 }
 
@@ -53,7 +57,7 @@ float AAbstractionPlayerCharacter::TakeDamage(float DamageAmount, FDamageEvent c
 {
 	float Damage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 	UE_LOG(LogTemp, Warning, TEXT("AAbstractionPlayerCharacter::TakeDamage Damage %.2f"), Damage);
-	if (HealthComponent)
+	if (HealthComponent && !HealthComponent->IsDead())
 	{
 		HealthComponent->TakeDamage(Damage);
 		if (HealthComponent->IsDead())
@@ -72,11 +76,19 @@ void AAbstractionPlayerCharacter::SetOnFire(UParticleSystemComponent* FirePartic
 
 const bool AAbstractionPlayerCharacter::IsAlive() const
 {
+	if (HealthComponent)
+	{
+		return !HealthComponent->IsDead();
+	}
 	return false;
 }
 
 const float AAbstractionPlayerCharacter::GetCurrentHealth() const
 {
+	if (HealthComponent)
+	{
+		return HealthComponent->GetCurrentHealth();
+	}
 	return 0.0f;
 }
 
@@ -86,12 +98,18 @@ void AAbstractionPlayerCharacter::OnDeath(bool IsFellOut)
 	APlayerController* PlayerController = GetController<APlayerController>();
 	if (PlayerController)
 	{
-		PlayerController->RestartLevel();
+		PlayerController->DisableInput(PlayerController);
 	}
+	GetWorld()->GetTimerManager().SetTimer(RestartLevelTimerHandle, this, &AAbstractionPlayerCharacter::OnDeathTimerFinished, TimeRestartLevelAfterDeath, false);
 }
 
 void AAbstractionPlayerCharacter::OnDeathTimerFinished()
 {
+	APlayerController* PlayerController = GetController<APlayerController>();
+	if (PlayerController)
+	{
+		PlayerController->RestartLevel();
+	}
 }
 
 void AAbstractionPlayerCharacter::StartInteraction()
@@ -104,4 +122,13 @@ void AAbstractionPlayerCharacter::StopInteraction()
 	OnInteractionCancel.Broadcast();
 }
 
+void AAbstractionPlayerCharacter::HandleItemCollected()
+{
+	ItemsCollected++;
+	// Play Effects here.
+	PC->PlayerCameraManager->StartCameraShake(CamShake, 1.0f);
+	PC->PlayDynamicForceFeedback(ForceFeedbackIntensity, ForceFeedbackDuration, true, false, true, false, EDynamicForceFeedbackAction::Start);
 
+	ItemCollected();
+
+}
