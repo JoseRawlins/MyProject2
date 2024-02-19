@@ -2,6 +2,7 @@
 
 
 #include "InteractionComponent.h"
+#include "DrawDebugHelpers.h"
 #include "AbstractionPlayerCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"

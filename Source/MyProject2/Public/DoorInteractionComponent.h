@@ -61,6 +61,9 @@ protected:
 	bool IsOpen() { return DoorState == EDoorState::DS_Open; }
 
 	void DebugDraw();
+
+	//UPROPERTY(EditAnywhere)
+	//bool TextRenderComponent;
 	
 	UPROPERTY(EditAnywhere)
 	FRotator DesiredRotation = FRotator::ZeroRotator;
@@ -82,5 +85,5 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	EDoorState DoorState;
 
-
+	
 };

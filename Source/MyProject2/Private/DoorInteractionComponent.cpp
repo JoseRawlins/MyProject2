@@ -8,6 +8,10 @@
 #include "Engine/Engine.h"
 #include "DrawDebugHelpers.h"
 #include "ObjectiveComponent.h"
+#include "InteractionComponent.h"
+#include "Components/TextRenderComponent.h"
+#include "AbstractionPlayerCharacter.h"
+
 constexpr float FLT_METERS(float meters) { return meters * 100.0f; }
 
 static TAutoConsoleVariable<bool> CVarToggleDebugDoor(
@@ -32,7 +36,15 @@ void UDoorInteractionComponent::BeginPlay()
 	FinalRotation = GetOwner()->GetActorRotation() + DesiredRotation;
 	// ...
 	CurrentRotationTime = 0.0f;
+
+//	TextRenderComponent = GetOwner()->FindComponentByClass<UTextRenderComponent>();
 }
+
+void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	UE_LOG(LogTemp, Warning, TEXT("UDoorInteractionComponent::OnOverlapBegin"))
+}
+
 
 void UDoorInteractionComponent::InteractionStart()
 {
@@ -40,6 +52,13 @@ void UDoorInteractionComponent::InteractionStart()
 
 void UDoorInteractionComponent::OpenDoor()
 {
+	if (IsOpen() || DoorState == EDoorState::DS_Opening)
+	{
+		return;
+	}
+	
+	DoorState = EDoorState::DS_Opening;
+	CurrentRotationTime = 0.0f;
 }
 
 void UDoorInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
